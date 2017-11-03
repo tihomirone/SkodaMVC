@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.jsp;
+package mj.skoda;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,15 +22,15 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class SampleWebJspApplication extends SpringBootServletInitializer {
+public class SkodaWebJspApplication extends SpringBootServletInitializer {
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(SampleWebJspApplication.class);
+		return application.sources(SkodaWebJspApplication.class);
 	}
 
 	public static void main(String[] args) throws Exception {
-		SpringApplication.run(SampleWebJspApplication.class, args);
+		SpringApplication.run(SkodaWebJspApplication.class, args);
 	}
 
 }

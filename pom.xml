@@ -17,6 +17,20 @@
 		<m2eclipse.wtp.contextRoot>/</m2eclipse.wtp.contextRoot>
 	</properties>
 	<dependencies>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2.version}</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>javax.persistence-api</artifactId>
+			<version>2.2</version>
+		</dependency>
+
 		<!-- Compile -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,6 +69,14 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<useSystemClassLoader>false</useSystemClassLoader>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
 				</configuration>
 			</plugin>
 		</plugins>

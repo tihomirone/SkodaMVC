@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.jsp;
+package mj.skoda.controller;
 
 import java.util.Date;
 import java.util.Map;
@@ -23,9 +23,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class WelcomeController {
+public class SkodaMVCController {
 
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
@@ -35,6 +40,23 @@ public class WelcomeController {
 		model.put("time", new Date());
 		model.put("message", this.message);
 		return "welcome";
+	}
+
+	@GetMapping("/test")
+	public String test(Map<String, Object> model) {
+
+		model.put("time", new Date());
+		model.put("message", "Person test");
+		return "personTest";
+	}
+
+	@RequestMapping(value = "/test2", method = RequestMethod.GET)
+	public ModelAndView test2(HttpServletRequest request, HttpServletResponse response) {
+
+		ModelAndView modelAndView = new ModelAndView("personTest2");
+		modelAndView.addObject("time", new Date());
+		modelAndView.addObject("message", "Person Test 2");
+		return modelAndView;
 	}
 
 	@RequestMapping("/foo")

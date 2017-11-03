@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package sample.jsp;
+package mj.skoda;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DirtiesContext
-public class SampleWebJspApplicationTests {
+public class SkodaWebJspApplicationTests {
 
 	@Autowired
 	private TestRestTemplate restTemplate;
