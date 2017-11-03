@@ -10,15 +10,15 @@ public interface EmployeeSkodaService {
 
     Person findByName(String name);
 
-    void saveUser(Person user);
+    void saveEmployee(Person user);
 
-    void updateUser(Person user);
+    void updateEmployee(Person user);
 
-    void deleteUserById(long id);
+    void deleteEmployeeById(long id);
 
-    List<Person> findAllUsers();
+    List<Person> findAllEmployees();
 
-    void deleteAllUsers();
+    void deleteAllEmployees();
 
-    public boolean isUserExist(Person user);
+    public boolean isEmployeeExist(Person user);
 }

@@ -49,6 +49,6 @@ public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
 
     private TypedQuery<Person> getTypedQuery() {
 
-        return entityManager.createQuery("SELECT u FROM Person u", Person.class);
+        return entityManager.createQuery("SELECT p FROM Person p", Person.class);
     }
 }

@@ -4,9 +4,11 @@ import mj.skoda.dao.EmployeeSkodaDao;
 import mj.skoda.model.Person;
 import mj.skoda.service.EmployeeSkodaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class EmployeeSkodaServiceImpl implements EmployeeSkodaService {
 
 
@@ -24,34 +26,34 @@ public class EmployeeSkodaServiceImpl implements EmployeeSkodaService {
     }
 
     @Override
-    public void saveUser(Person person) {
+    public void saveEmployee(Person person) {
 
         employeeSkodaDao.create(person);
     }
 
     @Override
-    public void updateUser(Person person) {
+    public void updateEmployee(Person person) {
 
         employeeSkodaDao.update(person);
     }
 
     @Override
-    public void deleteUserById(long id) {
+    public void deleteEmployeeById(long id) {
 
         employeeSkodaDao.delete(id);
     }
 
     @Override
-    public List<Person> findAllUsers() {
+    public List<Person> findAllEmployees() {
         return employeeSkodaDao.getAllUsers();
     }
 
     @Override
-    public void deleteAllUsers() {
+    public void deleteAllEmployees() {
     }
 
     @Override
-    public boolean isUserExist(Person user) {
+    public boolean isEmployeeExist(Person user) {
         return false;
     }
 }
