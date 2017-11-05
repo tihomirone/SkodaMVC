@@ -2,12 +2,14 @@ package mj.skoda.dao.impl;
 
 import mj.skoda.dao.EmployeeSkodaDao;
 import mj.skoda.model.Person;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
+@Repository
 public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
 
     @PersistenceContext

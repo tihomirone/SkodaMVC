@@ -17,11 +17,11 @@
 	Add a Person
 </h1>
 
-<c:url var="addAction" value="/person/add" ></c:url>
+<c:url var="addAction" value="/employee/save" ></c:url>
 
 <form:form action="${addAction}" commandName="person">
 <table>
-	<c:if test="${!empty person.name}">
+	<c:if test="${!empty person.firstName}">
 	<tr>
 		<td>
 			<form:label path="id">
@@ -36,31 +36,61 @@
 	</c:if>
 	<tr>
 		<td>
-			<form:label path="name">
-				<spring:message text="Name"/>
+			<form:label path="firstName">
+				<spring:message text="First Name"/>
 			</form:label>
 		</td>
 		<td>
-			<form:input path="name" />
+			<form:input path="firstName" />
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<form:label path="country">
-				<spring:message text="Country"/>
+			<form:label path="lastName">
+				<spring:message text="Last Name"/>
 			</form:label>
 		</td>
 		<td>
-			<form:input path="country" />
+			<form:input path="lastName" />
 		</td>
 	</tr>
+	<tr>
+        <td>
+            <form:label path="isMale">
+                <spring:message text="Is Male"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="isMale" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form:label path="birthday">
+                <spring:message text="Birthday"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="birthday" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <form:label path="education">
+                <spring:message text="Education"/>
+            </form:label>
+        </td>
+        <td>
+            <form:input path="education"/>
+        </td>
+    </tr>
 	<tr>
 		<td colspan="2">
-			<c:if test="${!empty person.name}">
+			<c:if test="${!empty person.firstName}">
 				<input type="submit"
 					value="<spring:message text="Edit Person"/>" />
 			</c:if>
-			<c:if test="${empty person.name}">
+			<c:if test="${empty person.firstName}">
 				<input type="submit"
 					value="<spring:message text="Add Person"/>" />
 			</c:if>
@@ -74,17 +104,22 @@
 	<table class="tg">
 	<tr>
 		<th width="80">Person ID</th>
-		<th width="120">Person Name</th>
-		<th width="120">Person Country</th>
-		<th width="60">Edit</th>
+		<th width="120">First Name</th>
+		<th width="120">Last Name</th>
+		<th width="120">Is Male</th>
+		<th width="120">Birthday</th>
+		<th width="120">Education</th>
 		<th width="60">Delete</th>
 	</tr>
 	<c:forEach items="${listPersons}" var="person">
 		<tr>
 			<td>${person.id}</td>
 			<td>${person.firstName}</td>
+			<td>${person.lastName}</td>
+			<td>${person.isMale}</td>
+			<td>${person.birthday}</td>
 			<td>${person.education}</td>
-			<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>
+			<%--<td><a href="<c:url value='/edit/${person.id}' />" >Edit</a></td>--%>
 			<td><a href="<c:url value='/remove/${person.id}' />" >Delete</a></td>
 		</tr>
 	</c:forEach>

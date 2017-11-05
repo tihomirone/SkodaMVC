@@ -19,12 +19,14 @@ package mj.skoda.controller;
 import java.util.Date;
 import java.util.Map;
 
+import mj.skoda.model.Person;
 import mj.skoda.service.EmployeeSkodaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,11 +55,29 @@ public class SkodaMVCController {
 
 		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
 
-		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
+//		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
 
 		return mv;
 
 	}
+
+	@RequestMapping(value = "/employee/add", method = RequestMethod.GET)
+	public ModelAndView addEmployee(@ModelAttribute("person") Person person) {
+
+		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
+		return mv;
+	}
+
+	@RequestMapping(value = "/employee/save", method = RequestMethod.POST)
+	public ModelAndView saveEmployee(@ModelAttribute("person") Person person) {
+
+		employeeSkodaService.saveEmployee(person);
+
+		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
+		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
+		return mv;
+	}
+
 
 	@GetMapping("/test")
 	public String test(Map<String, Object> model) {
