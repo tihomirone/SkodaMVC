@@ -1,7 +1,10 @@
 package mj.skoda.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "EMPLOYEE_SKODA")
@@ -21,6 +24,7 @@ public class Person {
     private boolean isMale;
 
     @Column(name="BIRTHDAY")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
     @Column(name="EDUCATION")

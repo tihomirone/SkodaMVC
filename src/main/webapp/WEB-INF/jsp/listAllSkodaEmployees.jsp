@@ -11,6 +11,18 @@
 		.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
 		.tg .tg-4eph{background-color:#f9f9f9}
 	</style>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            $( "#datepicker" ).datepicker({
+                                            dateFormat: "yy-mm-dd"
+                                          });
+        } );
+    </script>
 </head>
 <body>
 <h1>
@@ -61,7 +73,7 @@
             </form:label>
         </td>
         <td>
-            <form:input path="isMale" />
+            <form:checkbox path="isMale" />
         </td>
     </tr>
     <tr>
@@ -71,7 +83,7 @@
             </form:label>
         </td>
         <td>
-            <form:input path="birthday" />
+            <form:input path="birthday" id="datepicker" />
         </td>
     </tr>
     <tr>

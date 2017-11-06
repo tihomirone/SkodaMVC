@@ -19,7 +19,7 @@ public class EmployeeSkodaServiceImpl implements EmployeeSkodaService {
 
     @Override
     public Person findById(long id) {
-        return employeeSkodaDao.getUserById(id);
+        return employeeSkodaDao.getEmployeeById(id);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class EmployeeSkodaServiceImpl implements EmployeeSkodaService {
 
     @Override
     public List<Person> findAllEmployees() {
-        return employeeSkodaDao.getAllUsers();
+        return employeeSkodaDao.getAllEmployees();
     }
 
     @Override

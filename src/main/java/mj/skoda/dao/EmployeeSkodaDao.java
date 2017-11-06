@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface EmployeeSkodaDao {
 
-    void create(Person person);
+    void create(Person employee);
 
-    void update(Person person);
+    void update(Person employee);
 
-    Person getUserById(long id);
+    Person getEmployeeById(long id);
 
-    List<Person> getAllUsers();
+    List<Person> getAllEmployees();
 
     void delete(long id);
 }

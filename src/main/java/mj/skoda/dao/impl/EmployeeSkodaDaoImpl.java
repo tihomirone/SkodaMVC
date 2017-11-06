@@ -17,25 +17,25 @@ public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
 
 
     @Override
-    public void create(Person user) {
+    public void create(Person employee) {
 
-        entityManager.persist(user);
+        entityManager.persist(employee);
     }
 
     @Override
-    public void update(Person user) {
+    public void update(Person employee) {
 
-        entityManager.merge(user);
+        entityManager.merge(employee);
     }
 
     @Override
-    public Person getUserById(long id) {
+    public Person getEmployeeById(long id) {
 
         return entityManager.find(Person.class, id);
     }
 
     @Override
-    public List<Person> getAllUsers() {
+    public List<Person> getAllEmployees() {
 
         return getTypedQuery().getResultList();
     }
@@ -43,7 +43,7 @@ public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
     @Override
     public void delete(long id) {
 
-        Person person = getUserById(id);
+        Person person = getEmployeeById(id);
         if (person != null) {
             entityManager.remove(person);
         }
