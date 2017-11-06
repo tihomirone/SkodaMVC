@@ -95,6 +95,14 @@ public class SkodaMVCController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/employee/update", method = RequestMethod.POST)
+	public ModelAndView updateEmployee(@ModelAttribute("person") Person person) {
+
+		employeeSkodaService.updateEmployee(person);
+
+		return listAllSkodaEmployees();
+	}
+
 	@GetMapping("/test")
 	public String test(Map<String, Object> model) {
 

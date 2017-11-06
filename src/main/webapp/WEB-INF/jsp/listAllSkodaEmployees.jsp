@@ -26,6 +26,7 @@
 		<th width="120">Is Male</th>
 		<th width="120">Birthday</th>
 		<th width="120">Education</th>
+		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
 	<c:forEach items="${listPersons}" var="person">

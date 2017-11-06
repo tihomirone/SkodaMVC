@@ -29,7 +29,17 @@
 	Add a Person
 </h1>
 
-<c:url var="addAction" value="/employee/save" ></c:url>
+<c:choose>
+    <c:when test="${(empty action) || action.equals('add')}">
+        <c:url var="addAction" value="/employee/save" ></c:url>
+    </c:when>
+    <c:when test="${action.equals('edit')}">
+        <c:url var="addAction" value="/employee/update" ></c:url>
+    </c:when>
+    <c:otherwise>
+        <c:url var="addAction" value="/employee/save" ></c:url>
+    </c:otherwise>
+</c:choose>
 
 <form:form action="${addAction}" commandName="person">
 <table>
