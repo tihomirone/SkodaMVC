@@ -24,11 +24,7 @@ import mj.skoda.service.EmployeeSkodaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,25 +33,29 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class SkodaMVCController {
 
+	final private static String EMPLOYEE_ACTION_EDIT = "edit";
+	final private static String EMPLOYEE_ACTION_VIEW = "view";
+	final private static String EMPLOYEE_ACTION_ADD = "add";
+
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
 
 	@Autowired
 	EmployeeSkodaService employeeSkodaService;
 
-	@GetMapping("/")
+	/*@GetMapping("/")
 	public String welcome(Map<String, Object> model) {
 		model.put("time", new Date());
 		model.put("message", this.message);
 		return "welcome";
-	}
+	}*/
 
-	@RequestMapping(value = "/allSkodaEmployees", method = RequestMethod.GET)
+	@RequestMapping(value = {"/", "/allSkodaEmployees"}, method = RequestMethod.GET)
 	public ModelAndView listAllSkodaEmployees() {
 
 		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
 
-//		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
+		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
 
 		return mv;
 
@@ -64,7 +64,8 @@ public class SkodaMVCController {
 	@RequestMapping(value = "/employee/add", method = RequestMethod.GET)
 	public ModelAndView addEmployee(@ModelAttribute("person") Person person) {
 
-		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
+		ModelAndView mv = new ModelAndView("employeeView");
+		mv.addObject("action", this.EMPLOYEE_ACTION_ADD);
 		return mv;
 	}
 
@@ -73,11 +74,26 @@ public class SkodaMVCController {
 
 		employeeSkodaService.saveEmployee(person);
 
-		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
-		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
-		return mv;
+		return listAllSkodaEmployees();
 	}
 
+	@RequestMapping(value = "/employee/remove/{id}", method = RequestMethod.GET)
+	public ModelAndView removeEmployee(@PathVariable("id") long id) {
+
+		employeeSkodaService.deleteEmployeeById(id);
+
+		return listAllSkodaEmployees();
+	}
+
+	@RequestMapping(value = "/employee/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView editEmployee(@PathVariable("id") long id) {
+
+		ModelAndView mv = new ModelAndView("employeeView");
+		mv.addObject("person", employeeSkodaService.findById(id));
+		mv.addObject("action", this.EMPLOYEE_ACTION_EDIT);
+
+		return mv;
+	}
 
 	@GetMapping("/test")
 	public String test(Map<String, Object> model) {
