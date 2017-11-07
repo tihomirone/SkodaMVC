@@ -31,7 +31,7 @@
 	</tr>
 	<c:forEach items="${listPersons}" var="person">
 		<tr>
-			<td>${person.id}</td>
+			<td><a href="<c:url value='/employee/view/${person.id}' />" >${person.id}</a></td>
 			<td>${person.firstName}</td>
 			<td>${person.lastName}</td>
 			<td>${person.isMale}</td>

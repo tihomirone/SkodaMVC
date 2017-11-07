@@ -103,26 +103,14 @@ public class SkodaMVCController {
 		return listAllSkodaEmployees();
 	}
 
-	@GetMapping("/test")
-	public String test(Map<String, Object> model) {
+	@RequestMapping(value = "/employee/view/{id}", method = RequestMethod.GET)
+	public ModelAndView viewEmployee(@PathVariable("id") long id) {
 
-		model.put("time", new Date());
-		model.put("message", "Person test");
-		return "personTest";
-	}
+		ModelAndView mv = new ModelAndView("employeeView");
+		mv.addObject("person", employeeSkodaService.findById(id));
+		mv.addObject("action", this.EMPLOYEE_ACTION_VIEW);
 
-	@RequestMapping(value = "/test2", method = RequestMethod.GET)
-	public ModelAndView test2(HttpServletRequest request, HttpServletResponse response) {
-
-		ModelAndView modelAndView = new ModelAndView("personTest2");
-		modelAndView.addObject("time", new Date());
-		modelAndView.addObject("message", "Person Test 2");
-		return modelAndView;
-	}
-
-	@RequestMapping("/foo")
-	public String foo(Map<String, Object> model) {
-		throw new RuntimeException("Foo");
+		return mv;
 	}
 
 }

@@ -16,6 +16,14 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script>
+        $( document ).ready(function() {
+        	if (${action.equals("view")})
+        		$(".personField").prop("disabled", true);
+        });
+    </script>
+
     <script>
         $( function() {
             $( "#datepicker" ).datepicker({
@@ -36,9 +44,6 @@
     <c:when test="${action.equals('edit')}">
         <c:url var="addAction" value="/employee/update" ></c:url>
     </c:when>
-    <c:otherwise>
-        <c:url var="addAction" value="/employee/save" ></c:url>
-    </c:otherwise>
 </c:choose>
 
 <form:form action="${addAction}" commandName="person">
@@ -63,7 +68,7 @@
 			</form:label>
 		</td>
 		<td>
-			<form:input path="firstName" />
+			<form:input class="personField" path="firstName" />
 		</td>
 	</tr>
 	<tr>
@@ -73,7 +78,7 @@
 			</form:label>
 		</td>
 		<td>
-			<form:input path="lastName" />
+			<form:input class="personField" path="lastName" />
 		</td>
 	</tr>
 	<tr>
@@ -83,7 +88,7 @@
             </form:label>
         </td>
         <td>
-            <form:checkbox path="isMale" />
+            <form:checkbox class="personField" path="isMale" />
         </td>
     </tr>
     <tr>
@@ -93,7 +98,7 @@
             </form:label>
         </td>
         <td>
-            <form:input path="birthday" id="datepicker" />
+            <form:input class="personField" path="birthday" id="datepicker" />
         </td>
     </tr>
     <tr>
@@ -103,20 +108,16 @@
             </form:label>
         </td>
         <td>
-            <form:input path="education"/>
+            <form:input class="personField" path="education"/>
         </td>
     </tr>
 	<tr>
 		<td colspan="2">
-			<c:if test="${!empty person.firstName}">
-				<input type="submit"
-					value="<spring:message text="Edit Person"/>" />
-			</c:if>
-			<c:if test="${empty person.firstName}">
-				<input type="submit"
-					value="<spring:message text="Add Person"/>" />
-			</c:if>
-			<input type="button" onclick="location.href='/allSkodaEmployees'" value="<spring:message text="Close"/>" />
+		    <c:if test="${!action.equals('view')}">
+                <input type="submit"
+                    value="<spring:message text="${action}"/>" />
+            </c:if>
+			<input type="button" onclick="location.href='/allSkodaEmployees'" value="<spring:message text="close"/>" />
 		</td>
 	</tr>
 </table>
