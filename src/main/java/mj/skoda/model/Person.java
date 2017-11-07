@@ -5,6 +5,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "EMPLOYEE_SKODA")
@@ -27,8 +28,12 @@ public class Person {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;
 
-    @Column(name="EDUCATION")
-    private String education;
+    /*@Column(name="EDUCATION")
+    private String education;*/
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+    @JoinColumn(name="EDUCATION_ID")
+    private PersonEducation education;
 
     public long getId() {
         return id;
@@ -65,10 +70,10 @@ public class Person {
         this.birthday = birthday;
     }
 
-    public String getEducation() {
+    public PersonEducation getEducation() {
         return education;
     }
-    public void setEducation(String education) {
+    public void setEducation(PersonEducation education) {
         this.education = education;
     }
 }

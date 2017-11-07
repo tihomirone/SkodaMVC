@@ -33,15 +33,24 @@
     </script>
 </head>
 <body>
-<h1>
-	Add a Person
-</h1>
 
 <c:choose>
     <c:when test="${(empty action) || action.equals('add')}">
+        <h1>
+            Add a new Employee
+        </h1>
         <c:url var="addAction" value="/employee/save" ></c:url>
     </c:when>
     <c:when test="${action.equals('edit')}">
+        <h1>
+            Edit an Employee details
+        </h1>
+        <c:url var="addAction" value="/employee/update" ></c:url>
+    </c:when>
+    <c:when test="${action.equals('view')}">
+        <h1>
+            View an Employee details
+        </h1>
         <c:url var="addAction" value="/employee/update" ></c:url>
     </c:when>
 </c:choose>
@@ -103,12 +112,14 @@
     </tr>
     <tr>
         <td>
-            <form:label path="education">
+            <form:label path="education.grade">
                 <spring:message text="Education"/>
             </form:label>
         </td>
         <td>
-            <form:input class="personField" path="education"/>
+            <form:select class="personField" path="education.id">
+                <form:options items="${employeeEducationList}" itemLabel="grade" itemValue="id" />
+            </form:select>
         </td>
     </tr>
 	<tr>

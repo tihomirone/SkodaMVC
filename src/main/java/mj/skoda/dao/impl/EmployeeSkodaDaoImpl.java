@@ -1,7 +1,9 @@
 package mj.skoda.dao.impl;
 
+import mj.skoda.dao.EmployeeEducationDao;
 import mj.skoda.dao.EmployeeSkodaDao;
 import mj.skoda.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -16,16 +18,21 @@ public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Autowired
+    private EmployeeEducationDao employeeEducationDao;
+
 
     @Override
     public void create(Person employee) {
 
+        employee.setEducation(employeeEducationDao.getEmployeeEducationById(employee.getEducation().getId()));
         entityManager.persist(employee);
     }
 
     @Override
     public void update(Person employee) {
 
+        employee.setEducation(employeeEducationDao.getEmployeeEducationById(employee.getEducation().getId()));
         entityManager.merge(employee);
     }
 

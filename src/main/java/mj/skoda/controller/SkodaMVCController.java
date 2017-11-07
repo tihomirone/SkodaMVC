@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 import mj.skoda.model.Person;
+import mj.skoda.service.EmployeeEducationService;
 import mj.skoda.service.EmployeeSkodaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -43,7 +44,10 @@ public class SkodaMVCController {
 	private String message = "Hello World";
 
 	@Autowired
-	EmployeeSkodaService employeeSkodaService;
+	private EmployeeSkodaService employeeSkodaService;
+
+	@Autowired
+	private EmployeeEducationService employeeEducationService;
 
 	/*@GetMapping("/")
 	public String welcome(Map<String, Object> model) {
@@ -79,6 +83,7 @@ public class SkodaMVCController {
 
 		ModelAndView mv = new ModelAndView("employeeView");
 		mv.addObject("searchByFirstName", "");
+		mv.addObject("employeeEducationList", employeeEducationService.getEmployeeEducationList());
 		mv.addObject("action", this.EMPLOYEE_ACTION_ADD);
 		return mv;
 	}
@@ -104,6 +109,7 @@ public class SkodaMVCController {
 
 		ModelAndView mv = new ModelAndView("employeeView");
 		mv.addObject("person", employeeSkodaService.findById(id));
+		mv.addObject("employeeEducationList", employeeEducationService.getEmployeeEducationList());
 		mv.addObject("action", this.EMPLOYEE_ACTION_EDIT);
 
 		return mv;
@@ -122,6 +128,7 @@ public class SkodaMVCController {
 
 		ModelAndView mv = new ModelAndView("employeeView");
 		mv.addObject("person", employeeSkodaService.findById(id));
+		mv.addObject("employeeEducationList", employeeEducationService.getEmployeeEducationList());
 		mv.addObject("action", this.EMPLOYEE_ACTION_VIEW);
 
 		return mv;

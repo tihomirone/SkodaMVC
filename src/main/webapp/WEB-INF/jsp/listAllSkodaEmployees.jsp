@@ -56,7 +56,7 @@
 			<td>${person.lastName}</td>
 			<td>${person.isMale}</td>
 			<td>${person.birthday}</td>
-			<td>${person.education}</td>
+			<td>${person.education.grade}</td>
 			<td><a href="<c:url value='/employee/edit/${person.id}' />" >Edit</a></td>
 			<td><a href="<c:url value='/employee/remove/${person.id}' />" >Delete</a></td>
 		</tr>
