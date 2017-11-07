@@ -56,6 +56,13 @@ public class EmployeeSkodaServiceImpl implements EmployeeSkodaService {
 
     @Override
     public boolean isEmployeeExist(Person user) {
+
         return false;
+    }
+
+    @Override
+    public List<Person> findEmployeesByFirstName(String personFirstName) {
+
+        return employeeSkodaDao.findEmployeesByFirstName(personFirstName);
     }
 }

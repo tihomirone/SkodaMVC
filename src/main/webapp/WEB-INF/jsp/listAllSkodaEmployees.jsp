@@ -14,9 +14,29 @@
 </head>
 <body>
 
-<a href = "<c:url value = "/employee/add"/>">add new employee</a>
+<form:form action="/employee/search" commandName="searchPerson">
+<table>
+    <tr>
+        <td>
+            <input type="submit"
+                value="<spring:message text="search"/>" />
+        </td>
+        <td>
+            <form:input path="firstName"/>
+        </td>
+    </tr>
+</table>
+</form:form>
 
-<h3>Persons List</h3>
+<a href = "<c:url value = "/employee/add"/>">add new employee</a>
+<br/>
+<c:if test="${action.equals('search')}">
+    <a href = "<c:url value = "/allSkodaEmployees"/>">show all employees</a>
+    <br/>
+    <h2>Search results</h2>
+</c:if>
+
+<h3>Employees List</h3>
 <c:if test="${!empty listPersons}">
 	<table class="tg">
 	<tr>

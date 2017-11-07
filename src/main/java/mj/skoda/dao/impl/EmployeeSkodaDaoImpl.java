@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import java.lang.reflect.Type;
 import java.util.List;
 
 @Repository
@@ -37,7 +38,13 @@ public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
     @Override
     public List<Person> getAllEmployees() {
 
-        return getTypedQuery().getResultList();
+        return getTypedQuery("SELECT p FROM Person p", Person.class).getResultList();
+    }
+
+    @Override
+    public List<Person> findEmployeesByFirstName(String personFirstName) {
+
+        return getTypedQuery("SELECT p FROM Person p WHERE p.firstName LIKE :firstName", Person.class).setParameter("firstName", personFirstName).getResultList();
     }
 
     @Override
@@ -49,8 +56,8 @@ public class EmployeeSkodaDaoImpl implements EmployeeSkodaDao {
         }
     }
 
-    private TypedQuery<Person> getTypedQuery() {
+    private TypedQuery<Person> getTypedQuery(String query, Class entity) {
 
-        return entityManager.createQuery("SELECT p FROM Person p", Person.class);
+        return entityManager.createQuery(query, entity);
     }
 }

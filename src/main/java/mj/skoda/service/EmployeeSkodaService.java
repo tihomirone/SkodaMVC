@@ -20,5 +20,7 @@ public interface EmployeeSkodaService {
 
     void deleteAllEmployees();
 
-    public boolean isEmployeeExist(Person user);
+    boolean isEmployeeExist(Person user);
+
+    List<Person> findEmployeesByFirstName(String personFirstName);
 }

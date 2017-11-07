@@ -14,5 +14,7 @@ public interface EmployeeSkodaDao {
 
     List<Person> getAllEmployees();
 
+    List<Person> findEmployeesByFirstName(String personFirstName);
+
     void delete(long id);
 }

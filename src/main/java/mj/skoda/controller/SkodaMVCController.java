@@ -37,6 +37,8 @@ public class SkodaMVCController {
 	final private static String EMPLOYEE_ACTION_VIEW = "view";
 	final private static String EMPLOYEE_ACTION_ADD = "add";
 
+	final private static String EMPLOYEE_LIST_SEARCH = "search";
+
 	@Value("${application.message:Hello World}")
 	private String message = "Hello World";
 
@@ -54,17 +56,29 @@ public class SkodaMVCController {
 	public ModelAndView listAllSkodaEmployees() {
 
 		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
-
+		mv.addObject("searchPerson", new Person());
 		mv.addObject("listPersons", employeeSkodaService.findAllEmployees());
 
 		return mv;
 
 	}
 
+	@RequestMapping(value = "/employee/search", method = RequestMethod.POST)
+	public ModelAndView searchEmployee(@ModelAttribute("searchPerson") Person person) {
+
+		ModelAndView mv = new ModelAndView("listAllSkodaEmployees");
+		mv.addObject("action", this.EMPLOYEE_LIST_SEARCH);
+		mv.addObject("searchPerson", new Person());
+		mv.addObject("listPersons", employeeSkodaService.findEmployeesByFirstName(person.getFirstName()));
+
+		return mv;
+	}
+
 	@RequestMapping(value = "/employee/add", method = RequestMethod.GET)
 	public ModelAndView addEmployee(@ModelAttribute("person") Person person) {
 
 		ModelAndView mv = new ModelAndView("employeeView");
+		mv.addObject("searchByFirstName", "");
 		mv.addObject("action", this.EMPLOYEE_ACTION_ADD);
 		return mv;
 	}
